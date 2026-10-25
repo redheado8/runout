@@ -608,6 +608,19 @@
   footer{border-top:1px solid var(--hair);padding:28px 0 44px;color:var(--dust);font-size:13.5px}
   footer .wrap{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}
 
+  /* ---------- archive search ---------- */
+  .archive-search{display:grid;grid-template-columns:minmax(150px,220px) minmax(0,1fr);gap:8px 18px;align-items:center;margin:0 0 24px;padding:16px;border:1px solid var(--hair);background:linear-gradient(110deg,rgba(107,15,26,.12),transparent)}
+  .archive-search label{font:700 11px var(--display);letter-spacing:.18em;color:var(--scarlet)}
+  .archive-search input,.crate-refine select{width:100%;min-width:0;background:#12090B;border:1px solid rgba(237,224,212,.2);color:var(--bone);padding:12px 13px;font:14px var(--text);border-radius:0}
+  .archive-search input::placeholder{color:#93807A}.archive-search span{grid-column:2;color:var(--dust);font-size:12px}
+  .search-results{margin:-12px 0 28px;border-top:1px solid var(--hair)}.search-result{display:grid;grid-template-columns:100px minmax(0,1fr) auto;gap:12px;align-items:center;padding:13px 8px;border-bottom:1px solid var(--hair);color:var(--bone)}
+  .search-result .result-type{font:700 10px var(--display);letter-spacing:.14em;color:var(--scarlet)}.search-result strong{font:700 17px var(--display);letter-spacing:.04em}.search-result small{display:block;color:var(--dust);font-size:12px}.search-result button{border:1px solid var(--hair);background:transparent;color:var(--bone);padding:8px 10px;font:700 10px var(--display);letter-spacing:.1em;cursor:pointer}
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}.crate-refine{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0}.crate-refine select{font:700 10px var(--display);letter-spacing:.08em;padding:10px}
+  .genre-open{margin-top:18px;padding:11px 14px;border:1px solid var(--hair);background:transparent;color:var(--bone);font:700 11px var(--display);letter-spacing:.13em;cursor:pointer}.genre-open:hover{border-color:var(--scarlet);background:rgba(200,16,46,.1)}
+  .genre-dossier{margin-top:24px;padding:clamp(22px,4vw,44px);border:1px solid rgba(200,16,46,.42);background:radial-gradient(ellipse at 100% 0%,rgba(107,15,26,.22),transparent 45%),#10090B}.dossier-top{display:flex;justify-content:space-between;gap:14px;align-items:center;color:var(--scarlet);font:700 10px var(--display);letter-spacing:.15em}.dossier-top button,.quiz-actions button{background:transparent;border:1px solid var(--hair);color:var(--dust);padding:9px 12px;font:700 10px var(--display);letter-spacing:.1em;cursor:pointer}.dossier-kicker{margin-top:28px;color:var(--scarlet);font:700 12px var(--display);letter-spacing:.15em}.genre-dossier h3{margin:4px 0 14px;font:900 clamp(34px,7vw,72px)/.95 var(--display)}.genre-dossier>p:not(.dossier-kicker):not(.dossier-foot){max-width:68ch;color:#D1C0B7}.dossier-columns{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:28px;padding-top:22px;border-top:1px solid var(--hair)}.dossier-columns span{font:700 10px var(--display);letter-spacing:.16em;color:var(--scarlet)}.dossier-columns p{margin-top:8px;color:var(--bone);font-size:14px}.dossier-foot{margin-top:28px;padding-top:14px;border-top:1px solid var(--hair);color:var(--dust);font-size:12px}
+  .quiz-section{background:linear-gradient(180deg,transparent,rgba(107,15,26,.09),transparent)}.quiz-card{max-width:780px;margin:auto;border:1px solid var(--hair);padding:clamp(20px,4vw,42px);background:#10090B}.quiz-progress{height:2px;background:var(--hair);margin-bottom:24px}.quiz-progress span{display:block;width:0;height:100%;background:var(--scarlet);transition:width .3s}.quiz-step{color:var(--scarlet);font:700 10px var(--display);letter-spacing:.18em}.quiz-card h3{font:700 clamp(26px,5vw,42px)/1.08 var(--display);margin:12px 0 24px}.quiz-options{display:grid;grid-template-columns:1fr 1fr;gap:9px}.quiz-option{min-height:62px;text-align:left;padding:14px;border:1px solid var(--hair);background:transparent;color:var(--bone);font:16px var(--text);cursor:pointer}.quiz-option:hover,.quiz-option[aria-pressed="true"]{border-color:var(--scarlet);background:rgba(200,16,46,.12)}.quiz-actions{display:flex;justify-content:space-between;gap:10px;margin-top:24px}.quiz-actions button:disabled{opacity:.35;cursor:not-allowed}.quiz-result{margin-top:28px;padding:22px;border-left:2px solid var(--scarlet);background:rgba(107,15,26,.12)}.quiz-result span{color:var(--scarlet);font:700 10px var(--display);letter-spacing:.16em}.quiz-result h4{font:900 36px/1 var(--display);margin:8px 0}.quiz-result p{max-width:60ch;color:#D1C0B7}.quiz-result button{margin-top:16px;padding:10px 13px;border:1px solid var(--hair);background:transparent;color:var(--bone);font:700 10px var(--display);letter-spacing:.12em;cursor:pointer}
+  @media (max-width:620px){.archive-search{grid-template-columns:1fr;gap:8px}.archive-search span{grid-column:1}.search-result{grid-template-columns:1fr auto;gap:5px 12px}.search-result .result-type{grid-column:1/-1}.crate-refine,.dossier-columns,.quiz-options{grid-template-columns:1fr}.dossier-top{align-items:flex-start}}
+
   /* ---------- responsive ---------- */
   @media (max-width:960px){
     .room{grid-template-columns:1fr}
@@ -808,6 +821,7 @@
       <h2 id="erasTitle" data-text=""></h2>
       <p id="erasSub"></p>
     </div>
+    <div class="archive-search" role="search"><label for="archiveSearch">SEARCH THE ARCHIVE</label><input id="archiveSearch" type="search" placeholder="Try a band, song, genre, year, or era…" autocomplete="off"><span id="searchCount" aria-live="polite">Search bands, songs, genres and history</span></div><div id="searchResults" class="search-results" hidden></div>
     <div class="era-nav" id="eraNav" aria-label="Jump to a rock era"></div>
     <div class="era-progress" aria-hidden="true"><span id="eraProgress"></span></div>
     <div id="eraList"></div>
@@ -827,6 +841,7 @@
           <span class="crate-count" id="crateCount">06 RECORDS</span>
           <button class="crate-filter" id="savedOnly" type="button" aria-pressed="false">SHOW SAVED ★</button>
         </div>
+        <div class="crate-refine"><label class="sr-only" for="crateGenre">Filter records by sound</label><select id="crateGenre" aria-label="Filter records by sound"><option value="all">ALL SOUNDS</option><option value="classic">CLASSIC ROCK</option><option value="progressive">PROGRESSIVE</option><option value="metal">METAL</option><option value="alternative">ALTERNATIVE</option></select><label class="sr-only" for="crateSort">Sort records</label><select id="crateSort" aria-label="Sort records"><option value="featured">FEATURED ORDER</option><option value="year-asc">YEAR: OLDEST FIRST</option><option value="year-desc">YEAR: NEWEST FIRST</option><option value="artist">ARTIST A–Z</option></select></div>
         <div class="crate" id="crate"></div>
         <p class="crate-empty" id="crateEmpty" hidden>No saved records yet. Choose a record and save it to build your personal crate.</p>
       </div>
@@ -869,14 +884,12 @@
         <g id="nodes"></g>
       </svg>
     </div>
-    <div class="readout">
-      <h4 id="rTitle"></h4>
-      <div class="span" id="rSpan"></div>
-      <p id="rText"></p>
-      <div class="bands" id="rBands"></div>
-    </div>
+    <div class="readout"><h4 id="rTitle"></h4><div class="span" id="rSpan"></div><p id="rText"></p><div class="bands" id="rBands"></div><button class="genre-open" id="genreOpen" type="button">OPEN GENRE FIELD NOTES ↗</button></div>
+    <section class="genre-dossier" id="genreDossier" aria-labelledby="dossierTitle" hidden><div class="dossier-top"><span>RUNOUT FIELD NOTES / GENRE FILE</span><button id="closeDossier" type="button" aria-label="Close genre field notes">CLOSE ×</button></div><p class="dossier-kicker" id="dossierSpan"></p><h3 id="dossierTitle"></h3><p id="dossierText"></p><div class="dossier-columns"><div><span>THE SOUND</span><p id="dossierSound"></p></div><div><span>START HERE</span><p id="dossierBands"></p></div></div><p class="dossier-foot">A living archive, not a strict family tree. Genres overlap, borrow, and argue with one another.</p></section>
   </div>
 </section>
+
+<section id="quiz" class="quiz-section"><div class="wrap"><div class="head"><h2 data-text="FIND YOUR NOISE">FIND YOUR NOISE</h2><p>Four quick choices. No gatekeeping, no wrong answers — just a direction to follow.</p></div><div class="quiz-card" id="rockQuiz"><div class="quiz-progress"><span id="quizProgress"></span></div><p class="quiz-step" id="quizStep">QUESTION 01 / 04</p><h3 id="quizQuestion">What do you want a guitar to do?</h3><div class="quiz-options" id="quizOptions"></div><div class="quiz-actions"><button id="quizBack" type="button" disabled>← BACK</button><button id="quizRestart" type="button">START OVER ↻</button></div><div class="quiz-result" id="quizResult" hidden aria-live="polite"></div></div></div></section>
 
 <section class="close">
   <div class="wrap">
@@ -1066,12 +1079,12 @@
   /* ---------- structure ---------- */
 
   var ARTISTS = [
-    { id:'queen',     name:'QUEEN',        song:'Bohemian Rhapsody',     year:'1975', img:'' },
-    { id:'scorpions', name:'SCORPIONS',    song:'Still Loving You',      year:'1984', img:'' },
-    { id:'zeppelin',  name:'LED ZEPPELIN', song:'Stairway to Heaven',    year:'1971', img:'' },
-    { id:'floyd',     name:'PINK FLOYD',   song:'Comfortably Numb',      year:'1979', img:'' },
-    { id:'nirvana',   name:'NIRVANA',      song:'Smells Like Teen Spirit',year:'1991', img:'' },
-    { id:'metallica', name:'METALLICA',    song:'Master of Puppets',     year:'1986', img:'', audio:'' }
+    { id:'queen',     name:'QUEEN',        song:'Bohemian Rhapsody',      year:'1975', genre:'classic', img:'' },
+    { id:'scorpions', name:'SCORPIONS',    song:'Still Loving You',       year:'1984', genre:'metal', img:'' },
+    { id:'zeppelin',  name:'LED ZEPPELIN', song:'Stairway to Heaven',     year:'1971', genre:'classic', img:'' },
+    { id:'floyd',     name:'PINK FLOYD',   song:'Comfortably Numb',       year:'1979', genre:'progressive', img:'' },
+    { id:'nirvana',   name:'NIRVANA',      song:'Smells Like Teen Spirit',year:'1991', genre:'alternative', img:'' },
+    { id:'metallica', name:'METALLICA',    song:'Master of Puppets',      year:'1986', genre:'metal', img:'', audio:'' }
   ];
 
   var COL = [78, 248, 418, 588, 758, 928, 1098];
@@ -1086,13 +1099,12 @@
   var LINKS = [
     ['blues','rnr'],
     ['rnr','brit'],['rnr','garage'],['rnr','surf'],
-    ['brit','psych'],['brit','hard'],
-    ['garage','proto'],['surf','proto'],
-    ['psych','prog'],['psych','hard'],
-    ['hard','metal'],['proto','punk'],
-    ['metal','thrash'],['metal','glam'],['punk','post'],
-    ['metal','grunge'],['punk','grunge'],
-    ['post','indie'],['post','goth']
+    ['brit','psych'],['brit','hard'],['brit','garage'],
+    ['garage','proto'],['surf','psych'],['surf','proto'],
+    ['psych','prog'],['psych','hard'],['psych','proto'],
+    ['hard','metal'],['proto','punk'],['hard','prog'],
+    ['metal','thrash'],['metal','glam'],['metal','grunge'],['punk','post'],
+    ['punk','grunge'],['punk','indie'],['post','indie'],['post','goth'],['grunge','indie']
   ];
 
   var NW = 150, NH = 36, SVGNS = 'http://www.w3.org/2000/svg';
@@ -1185,23 +1197,24 @@
   }
 
   /* ---------- render: crate ---------- */
-  var showSavedOnly = false;
+  var showSavedOnly = false, crateGenre = 'all', crateSort = 'featured';
   function renderCrate(){
-    var out = '', visible = 0;
-    ARTISTS.forEach(function(a, i){
-      if (showSavedOnly && savedRecords.indexOf(a.id) === -1) return;
+    var out='',visible=0,records=ARTISTS.slice();
+    if(crateSort==='year-asc')records.sort(function(a,b){return Number(a.year)-Number(b.year);});
+    if(crateSort==='year-desc')records.sort(function(a,b){return Number(b.year)-Number(a.year);});
+    if(crateSort==='artist')records.sort(function(a,b){return a.name.localeCompare(b.name);});
+    records.forEach(function(a){
+      if(showSavedOnly&&savedRecords.indexOf(a.id)===-1)return;
+      if(crateGenre!=='all'&&a.genre!==crateGenre)return;
       visible++;
-      out += '<button class="cut" data-id="' + a.id + '" aria-current="' +
-             (a.id === current) + '">' +
-             '<span class="no">' + (i+1 < 10 ? '0' : '') + (i+1) + '</span>' +
-             '<span class="t"><b>' + esc(a.name) + '</b><span>' + esc(a.song) + '</span></span>' +
-             '<span class="yr">' + esc(a.year) + '</span></button>';
+      out+='<button class="cut" data-id="'+a.id+'" aria-current="'+(a.id===current)+'"><span class="no">'+String(ARTISTS.findIndex(function(x){return x.id===a.id;})+1).padStart(2,'0')+'</span><span class="t"><b>'+esc(a.name)+'</b><span>'+esc(a.song)+'</span></span><span class="yr">'+esc(a.year)+'</span></button>';
     });
-    $('crate').innerHTML = out;
-    $('crateCount').textContent = (showSavedOnly ? savedRecords.length : ARTISTS.length).toString().padStart(2,'0') + (showSavedOnly ? ' SAVED' : ' RECORDS');
-    $('savedOnly').setAttribute('aria-pressed', String(showSavedOnly));
-    $('savedOnly').textContent = showSavedOnly ? 'SHOW ALL RECORDS' : 'SHOW SAVED ★';
-    $('crateEmpty').hidden = !(showSavedOnly && visible === 0);
+    $('crate').innerHTML=out;
+    $('crateCount').textContent=String(visible).padStart(2,'0')+(showSavedOnly?' SAVED':' RECORDS');
+    $('savedOnly').setAttribute('aria-pressed',String(showSavedOnly));
+    $('savedOnly').textContent=showSavedOnly?'SHOW ALL RECORDS':'SHOW SAVED ★';
+    $('crateEmpty').hidden=visible!==0;
+    $('crateEmpty').textContent=showSavedOnly&&savedRecords.length===0?'No saved records yet. Choose a record and save it to build your personal crate.':'No records match these filters. Try another sound or sorting option.';
   }
 
   /* ---------- render: lineage ---------- */
@@ -1308,6 +1321,7 @@
     $('rSpan').textContent  = d.span;
     $('rText').textContent  = d.text;
     $('rBands').textContent = d.bands || '';
+    $('genreDossier').hidden = true;
     replay(document.querySelector('.readout'), 'swap');
   }
 
@@ -1479,6 +1493,65 @@
   });
 
 
+  /* ---------- archive-wide search ---------- */
+  function runArchiveSearch(){
+    var q=$('archiveSearch').value.trim().toLowerCase(),results=[];
+    if(q){
+      ARTISTS.forEach(function(a){if([a.name,a.song,a.year,a.genre].join(' ').toLowerCase().indexOf(q)!==-1)results.push({type:'RECORD',title:a.name,detail:a.song+' · '+a.year,id:a.id,target:'listen'});});
+      Object.keys(C.genres).forEach(function(id){var g=C.genres[id];if([g.name,g.span,g.text,BANDS[id]||''].join(' ').toLowerCase().indexOf(q)!==-1)results.push({type:'GENRE',title:g.name,detail:g.span+' · '+(BANDS[id]||''),id:id,target:'lineage'});});
+      C.eras.forEach(function(e,i){if([e.years,e.tag,e.title,e.paras.join(' '),e.bands].join(' ').toLowerCase().indexOf(q)!==-1)results.push({type:'ERA',title:e.title,detail:e.years+' · '+e.tag,id:String(i),target:'eras'});});
+    }
+    $('searchCount').textContent=q?results.length+' result'+(results.length===1?'':'s')+' for “'+$('archiveSearch').value.trim()+'”':'Search bands, songs, genres and history';
+    var box=$('searchResults');box.hidden=!q;
+    box.innerHTML=results.length?results.slice(0,16).map(function(r){return '<div class="search-result"><span class="result-type">'+esc(r.type)+'</span><div><strong>'+esc(r.title)+'</strong><small>'+esc(r.detail)+'</small></div><button type="button" data-search-type="'+r.type+'" data-search-id="'+esc(r.id)+'" data-search-target="'+r.target+'">OPEN ↗</button></div>';}).join(''):'<p class="crate-empty">No matches yet. Try a band name, song title, genre, or year.</p>';
+  }
+  $('archiveSearch').addEventListener('input',runArchiveSearch);
+  $('searchResults').addEventListener('click',function(e){
+    var b=e.target.closest('[data-search-type]');if(!b)return;
+    if(b.dataset.searchType==='RECORD')loadTrack(b.dataset.searchId);
+    if(b.dataset.searchType==='GENRE'){selectedGenre=b.dataset.searchId;paintMap(C);openGenreDossier();}
+    if(b.dataset.searchType==='ERA'){var target=$('era-'+b.dataset.searchId);if(target)target.scrollIntoView({behavior:still?'auto':'smooth',block:'start'});}
+    var section=$(b.dataset.searchTarget);if(section)section.scrollIntoView({behavior:still?'auto':'smooth',block:'start'});
+  });
+
+  /* ---------- genre field notes ---------- */
+  function openGenreDossier(){
+    var d=C.genres[selectedGenre];if(!d)return;
+    $('dossierSpan').textContent=d.span;$('dossierTitle').textContent=d.name;$('dossierText').textContent=d.text;
+    $('dossierSound').textContent=d.sound||'A branch shaped by the artists, scenes, and recording technology of its time.';
+    $('dossierBands').textContent=d.bands||BANDS[selectedGenre]||'Explore the connected branches on the map.';
+    $('genreDossier').hidden=false;$('genreDossier').scrollIntoView({behavior:still?'auto':'smooth',block:'nearest'});
+  }
+  $('genreOpen').addEventListener('click',openGenreDossier);
+  $('closeDossier').addEventListener('click',function(){$('genreDossier').hidden=true;});
+
+  /* ---------- rock sound-finder quiz ---------- */
+  var quizQuestions=[
+    {q:'What do you want a guitar to do?',a:[['Build a huge, slow riff','metal'],['Twist into strange new shapes','progressive'],['Cut through the noise fast','alternative'],['Carry a massive sing-along','classic']]},
+    {q:'Pick a live-show feeling.',a:[['A wall of sound and lights','metal'],['A trip that keeps changing','progressive'],['Sweaty, messy, close to the crowd','alternative'],['A room singing every word','classic']]},
+    {q:'Which detail hooks you first?',a:[['Precision and impact','metal'],['Odd turns and atmosphere','progressive'],['Honest edges and restless energy','alternative'],['A melody that stays for days','classic']]},
+    {q:'Choose a record mood.',a:[['Dark, heavy, uncompromising','metal'],['Dreamlike and expansive','progressive'],['Raw, direct, a little bruised','alternative'],['Dramatic and timeless','classic']]}
+  ];
+  var quizAnswers=[],quizIndex=0;
+  function renderQuiz(){
+    var q=quizQuestions[quizIndex];$('quizQuestion').textContent=q.q;$('quizStep').textContent='QUESTION '+String(quizIndex+1).padStart(2,'0')+' / 04';
+    $('quizProgress').style.width=((quizIndex+1)/quizQuestions.length*100)+'%';$('quizBack').disabled=quizIndex===0;
+    $('quizOptions').innerHTML=q.a.map(function(a){return '<button class="quiz-option" type="button" data-answer="'+a[1]+'" aria-pressed="'+(quizAnswers[quizIndex]===a[1])+'">'+esc(a[0])+'</button>';}).join('');
+    $('quizResult').hidden=true;
+  }
+  function finishQuiz(){
+    var tally={classic:0,progressive:0,metal:0,alternative:0};quizAnswers.forEach(function(a){if(a)tally[a]++;});
+    var result=Object.keys(tally).sort(function(a,b){return tally[b]-tally[a];})[0];
+    var details={classic:{name:'CLASSIC ROCK',genre:'hard',desc:'You want riffs with history, big choruses, and songs that feel built to outlast the room.'},progressive:{name:'PROGRESSIVE ROCK',genre:'prog',desc:'You follow the detours: atmosphere, long forms, strange structures, and records that reward a second listen.'},metal:{name:'HEAVY METAL',genre:'metal',desc:'You want weight, precision, dark edges, and a sound that hits like machinery coming alive.'},alternative:{name:'ALTERNATIVE / GRUNGE',genre:'grunge',desc:'You gravitate toward raw feeling, restless guitars, and music that never sounds too polished to mean it.'}};
+    var d=details[result];$('quizResult').innerHTML='<span>YOUR FREQUENCY</span><h4>'+d.name+'</h4><p>'+d.desc+'</p><button id="quizExplore" type="button">TRACE THIS SOUND ↗</button>';$('quizResult').hidden=false;
+    $('quizExplore').addEventListener('click',function(){selectedGenre=d.genre;paintMap(C);$('lineage').scrollIntoView({behavior:still?'auto':'smooth'});});
+  }
+  $('quizOptions').addEventListener('click',function(e){var b=e.target.closest('[data-answer]');if(!b)return;quizAnswers[quizIndex]=b.dataset.answer;if(quizIndex<quizQuestions.length-1){quizIndex++;renderQuiz();}else finishQuiz();});
+  $('quizBack').addEventListener('click',function(){if(quizIndex>0){quizIndex--;renderQuiz();}});
+  $('quizRestart').addEventListener('click',function(){quizAnswers=[];quizIndex=0;renderQuiz();});
+  $('crateGenre').addEventListener('change',function(){crateGenre=this.value;renderCrate();});
+  $('crateSort').addEventListener('change',function(){crateSort=this.value;renderCrate();});
+
   /* ---------- boot ---------- */
   Object.keys(BANDS).forEach(function(k){
     C.genres[k].bands = BANDS[k];
@@ -1486,6 +1559,7 @@
 
   buildMap();
   apply();
+  renderQuiz();
   watchSections();
   requestAnimationFrame(function(){
     document.documentElement.classList.add('lit');
