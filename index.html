@@ -173,7 +173,7 @@
   .cue:hover{color:var(--bone);text-decoration:none}
   .cue i{display:block;width:1px;height:26px;background:linear-gradient(var(--hair),transparent)}
   /* Optical centering: letter-spacing adds visual weight to the right. */
-  .cue span{display:block;position:relative;left:-.9em;transform:translateX(-.5px);text-align:center}
+  .cue span{display:block;position:relative;left:-1.1em;text-align:center}
 
   /* ---------- motion ---------- */
   @media (prefers-reduced-motion:no-preference){
@@ -516,31 +516,7 @@
   }
 
 
-  /* ---------- eras: give the timeline a more tactile, less rigid rhythm ---------- */
-  #eraList{position:relative;padding-inline-start:clamp(0px,1.2vw,14px)}
-  #eraList::before{
-    content:"";position:absolute;top:0;bottom:0;left:5px;width:1px;
-    background:linear-gradient(to bottom,transparent,var(--oxblood) 6%,rgba(200,16,46,.58) 50%,var(--oxblood) 94%,transparent);
-    pointer-events:none;
-  }
-  #eraList .era{position:relative;padding-inline-start:clamp(22px,3vw,38px)}
-  #eraList .era::before{
-    content:"";position:absolute;left:0;top:clamp(34px,4vw,49px);
-    width:10px;height:10px;border-radius:50%;background:var(--tar);border:1px solid var(--scarlet);
-    box-shadow:0 0 0 4px rgba(200,16,46,.08);transition:background .2s,box-shadow .2s,transform .2s;
-  }
-  #eraList .era:hover::before{background:var(--scarlet);box-shadow:0 0 0 6px rgba(200,16,46,.12);transform:scale(1.08)}
-  #eraList .years{color:var(--scarlet);text-shadow:0 0 24px rgba(200,16,46,.12)}
-  #eraList .era:nth-child(even){transform:translateX(10px)}
-  #eraList .era:nth-child(even):hover{transform:translateX(14px)}
-  #eraList .era:nth-child(odd):hover{transform:translateX(4px)}
-  @media(max-width:900px){
-    #eraList{padding-inline-start:0}
-    #eraList .era{padding-inline-start:26px}
-    #eraList .era:nth-child(even),#eraList .era:nth-child(odd){transform:none}
-    #eraList .era:nth-child(even):hover,#eraList .era:nth-child(odd):hover{transform:none}
-  }
-
+  
 </style>
 </head>
 <body>
