@@ -269,31 +269,81 @@
     line-height:1.5;
   }
 
-  /* ---------- interludes ---------- */
+  /* ---------- editorial interludes ---------- */
   .band{
     margin-inline:calc(50% - 50vw);
-    padding:clamp(64px,10vw,140px) clamp(20px,5vw,60px);
-    border-block:1px solid var(--hair);
+    padding:clamp(30px,5.5vw,72px) clamp(20px,5vw,60px);
+    background:#10090B;
+    border-block:1px solid rgba(237,224,212,.12);
+  }
+  .band-inner{
+    position:relative;
+    max-width:1100px;
+    margin-inline:auto;
+    padding:clamp(28px,5vw,64px) clamp(22px,5vw,68px);
+    overflow:hidden;
+    background:#EDE0D4;
+    color:#170D0F;
+    border-top:3px solid #C8102E;
+    box-shadow:0 16px 42px rgba(0,0,0,.2);
+  }
+  .band-inner:after{
+    content:"";
+    position:absolute;
+    right:clamp(18px,3vw,38px);
+    top:clamp(18px,3vw,38px);
+    width:clamp(42px,7vw,82px);
+    aspect-ratio:1;
+    border:1px solid rgba(23,13,15,.22);
+    border-radius:50%;
+    box-shadow:inset 0 0 0 5px #EDE0D4,inset 0 0 0 6px rgba(23,13,15,.16),inset 0 0 0 14px #EDE0D4,inset 0 0 0 15px rgba(23,13,15,.12);
+    pointer-events:none;
+  }
+  .band-kicker{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:clamp(24px,4vw,42px);
+    color:#8B1A2B;
+    font-size:10px;
+    font-weight:700;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+  }
+  .band-kicker:after{
+    content:"";
+    width:48px;
+    height:1px;
+    background:#8B1A2B;
+    opacity:.65;
   }
   .band p{
+    position:relative;
+    z-index:1;
+    margin:0;
+    max-width:24ch;
     font-family:var(--display);
     font-weight:700;
-    font-size:clamp(26px,4.6vw,58px);
-    line-height:1.1;
-    letter-spacing:var(--track);
-    max-width:26ch;
-    margin-inline:auto;
-    text-align:center;
+    font-size:clamp(30px,5.2vw,66px);
+    line-height:1.02;
+    letter-spacing:-.025em;
+    text-align:left;
+    color:#170D0F;
   }
   .band p span{display:block}
-  /* the second sentence sits back a little, so the pair reads as a turn */
-  .band p span + span{margin-top:.24em;opacity:.72}
-  .band.dark{background:linear-gradient(170deg,#1B0A10,#0D0709)}
-  .band.light{
-    background:var(--bone);
-    color:#14090C;
+  .band p span + span{
+    margin-top:.2em;
+    color:#8B1A2B;
   }
-  .band.light p{color:#14090C}
+  .band.dark,.band.light{background:#10090B}
+  @media(max-width:600px){
+    .band{padding:24px 16px}
+    .band-inner{padding:26px 22px}
+    .band-inner:after{width:36px;right:14px;top:14px;opacity:.7}
+    .band-kicker{font-size:9px;letter-spacing:.16em;margin-bottom:26px}
+    .band p{font-size:clamp(29px,8vw,42px);max-width:19ch}
+  }
+
 
   /* ---------- eras ---------- */
   .era{
@@ -944,11 +994,12 @@
       var band = BAND_AFTER[idx];
       if (band){
         var which = (band === 'dark') ? 0 : 1;
-        out += '<div class="band ' + band + '"><p>' +
+        out += '<div class="band ' + band + '"><div class="band-inner">' +
+               '<div class="band-kicker">HOW ROCK EVOLVED <span> / 0' + (which + 1) + '</span></div><p>' +
                t.bands[which].map(function(line){
                  return '<span>' + esc(line) + '</span>';
                }).join('') +
-               '</p></div>';
+               '</p></div></div>';
       }
     });
     $('eraList').innerHTML = out;
