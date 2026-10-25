@@ -424,28 +424,48 @@
   }
 
   .sleeve{
-    margin-top:26px;display:grid;grid-template-columns:118px 1fr;gap:20px;align-items:center;
-    background:var(--sleeve);border:1px solid var(--hair);padding:16px;max-width:540px;
+    position:relative;margin-top:26px;display:grid;
+    grid-template-columns:minmax(128px,160px) 1fr;gap:clamp(18px,3vw,28px);
+    align-items:center;background:linear-gradient(115deg,#16090D,#0D0809 72%);
+    border:1px solid rgba(237,224,212,.16);padding:clamp(14px,2.4vw,22px);
+    max-width:620px;overflow:hidden;
+  }
+  .sleeve::before{
+    content:"";position:absolute;inset:0;pointer-events:none;opacity:.28;
+    background:repeating-linear-gradient(0deg,transparent 0 4px,rgba(237,224,212,.025) 5px,transparent 6px);
   }
   .sleeve .art{
-    aspect-ratio:1;
-    background:linear-gradient(150deg,var(--oxblood),#30070F 70%),var(--raise);
-    display:grid;place-content:center;text-align:center;padding:8px;
-    border:1px solid rgba(0,0,0,.5);direction:ltr;
+    position:relative;isolation:isolate;aspect-ratio:1;overflow:hidden;
+    display:flex;align-items:flex-end;justify-content:flex-start;padding:12px;
+    border:1px solid rgba(237,224,212,.2);direction:ltr;
+    background:radial-gradient(circle at 70% 26%,rgba(200,16,46,.42),transparent 34%),linear-gradient(145deg,#241217 0%,#10090B 56%,#5D0B19 100%);
+    box-shadow:0 8px 24px rgba(0,0,0,.35);
+  }
+  .sleeve .art::before{
+    content:"";position:absolute;z-index:-1;width:76%;aspect-ratio:1;border-radius:50%;top:8%;right:-12%;
+    background:repeating-radial-gradient(circle at center,#0A0607 0 3px,#312126 4px 5px,#0A0607 6px 8px);
+    border:1px solid rgba(237,224,212,.24);box-shadow:0 0 0 7px rgba(10,6,7,.28),0 0 35px rgba(200,16,46,.18);
+  }
+  .sleeve .art::after{
+    content:"";position:absolute;z-index:0;left:12%;top:-8%;width:13%;height:120%;
+    background:linear-gradient(180deg,transparent,#C8102E 28%,#EDE0D4 50%,#C8102E 72%,transparent);
+    transform:rotate(28deg);opacity:.9;filter:drop-shadow(0 0 9px rgba(200,16,46,.35));
   }
   .sleeve .art span{
-    font-family:"Big Shoulders Display",Impact,sans-serif;
-    font-weight:900;font-size:15px;line-height:1.02;letter-spacing:.08em;color:var(--bone);
+    position:relative;z-index:1;display:block;padding-top:8px;border-top:1px solid rgba(237,224,212,.48);
+    font-family:var(--display);font-weight:700;font-size:11px;line-height:1.25;letter-spacing:.18em;color:var(--bone);text-align:left;
   }
-  .sleeve .meta strong{
-    display:block;font-family:var(--display);font-weight:700;font-size:19px;
-    letter-spacing:var(--track);margin-bottom:3px;
+  .sleeve .meta{position:relative;z-index:1;min-width:0}
+  .sleeve .meta strong{display:block;font-family:var(--display);font-weight:900;font-size:clamp(23px,3vw,31px);line-height:1.02;letter-spacing:.01em;margin-bottom:8px;color:var(--bone)}
+  .sleeve .meta em{display:block;font-family:var(--display);font-size:11px;color:#D05A68;font-style:normal;font-weight:700;letter-spacing:.18em;margin-bottom:14px;direction:ltr;text-align:start}
+  .sleeve .meta p{font-size:14px;line-height:1.65;color:#C5B4AA;max-width:44ch}
+  @media(max-width:620px){
+    .sleeve{grid-template-columns:112px minmax(0,1fr);gap:16px}
+    .sleeve .art{padding:9px}
+    .sleeve .art span{font-size:9px}
+    .sleeve .meta strong{font-size:23px}
+    .sleeve .meta em{font-size:10px;letter-spacing:.12em}
   }
-  .sleeve .meta em{
-    display:block;font-size:13px;color:var(--dust);font-style:normal;
-    letter-spacing:var(--track);margin-bottom:9px;direction:ltr;text-align:start;
-  }
-  .sleeve .meta p{font-size:14.5px;line-height:1.6;color:#C5B4AA;max-width:44ch}
 
   /* ---------- listening room ---------- */
   .listen{background:var(--sleeve);border-block:1px solid var(--hair)}
@@ -886,7 +906,7 @@
             'It was also the first music aimed squarely at teenagers, which is why it frightened people. Within a few years the original wave had been thinned by scandal, the army, a plane crash, and record companies replacing dangerous singers with polite ones.'
           ],
           bands:'Chuck Berry, Little Richard, Bo Diddley, Buddy Holly, Elvis Presley, Jerry Lee Lewis',
-          album:{ art:'JOHNNY<br>B.<br>GOODE', title:'Johnny B. Goode', meta:'CHUCK BERRY · 1958',
+          album:{ art:'THE<br>45 RPM<br>ARCHIVE', title:'Johnny B. Goode', meta:'CHUCK BERRY  /  1958',
             note:'The opening guitar run is the sound every rock band since has tried to start a song with. NASA put it on a gold record and sent it out of the solar system.' }
         },
         { years:'1963', tag:'— 1969 · THE ALBUM',
