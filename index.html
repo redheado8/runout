@@ -481,9 +481,13 @@
   }
   .node{cursor:pointer}
   .node:hover rect{fill:#2A1418;stroke:var(--scarlet)}
-  .node.on rect{fill:var(--oxblood);stroke:var(--scarlet)}
-  .link{fill:none;stroke:rgba(237,224,212,.2);stroke-width:1.4;transition:stroke .16s}
-  .link.on{stroke:var(--scarlet);stroke-width:2.2}
+  .node:focus-visible rect{stroke:var(--bone);stroke-width:2.5}
+  .node.on rect{fill:var(--oxblood);stroke:var(--scarlet);stroke-width:2}
+  .node.related rect{fill:#241317;stroke:rgba(200,16,46,.7)}
+  .node.related text{fill:#fff2e8}
+  .link{fill:none;stroke:rgba(237,224,212,.2);stroke-width:1.4;transition:stroke .16s,opacity .16s}
+  .link.on{stroke:var(--scarlet);stroke-width:2.4;opacity:1}
+  .link.dim{opacity:.28}
 
   .readout{margin-top:28px;border-inline-start:2px solid var(--scarlet);padding:4px 0;padding-inline-start:22px;min-height:120px}
   .readout h4{font-family:var(--display);font-weight:700;font-size:26px;letter-spacing:var(--track);margin-bottom:2px}
@@ -1063,15 +1067,24 @@
   }
 
   function paintMap(t){
+    var related = Object.create(null);
+    related[selectedGenre] = true;
+    LINKS.forEach(function(pair){
+      if (pair[0] === selectedGenre) related[pair[1]] = true;
+      if (pair[1] === selectedGenre) related[pair[0]] = true;
+    });
     document.querySelectorAll('.node').forEach(function(g){
       var id = g.dataset.id, d = t.genres[id];
       g.querySelector('text').textContent = d.name;
-      g.setAttribute('aria-label', d.name + ', ' + d.span);
+      g.setAttribute('aria-label', d.name + ', ' + d.span + '. Select to explore its direct genre connections.');
+      g.setAttribute('aria-pressed', String(id === selectedGenre));
       g.classList.toggle('on', id === selectedGenre);
+      g.classList.toggle('related', id !== selectedGenre && !!related[id]);
     });
     document.querySelectorAll('.link').forEach(function(p){
       var on = (p.dataset.to === selectedGenre || p.dataset.from === selectedGenre);
       p.classList.toggle('on', on);
+      p.classList.toggle('dim', !on);
       if (still) return;
       try {
         if (on){
