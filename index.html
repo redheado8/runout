@@ -470,6 +470,19 @@
     transition:border-color .16s,color .16s,background .16s;
   }
   .hear:hover{border-color:var(--scarlet);color:var(--scarlet);text-decoration:none}
+  .save-record{
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    margin:24px 0 0 10px;padding:11px 14px;min-height:46px;
+    border:1px solid var(--hair-strong);border-radius:2px;background:transparent;
+    color:var(--dust);font:700 12px var(--display);letter-spacing:.08em;
+    cursor:pointer;transition:color .2s,border-color .2s,background .2s;
+  }
+  .save-record:hover,.save-record[aria-pressed="true"]{
+    color:var(--bone);border-color:var(--scarlet);background:rgba(200,16,46,.12)
+  }
+  .saved-note{min-height:1.5em;margin-top:10px;color:var(--dust);font-size:13px}
+  .cut .saved-mark{color:var(--scarlet);font-size:14px;margin-inline-start:5px}
+  @media(max-width:620px){.save-record{margin:12px 0 0;width:100%}.hear{width:100%;justify-content:center}}
 
   /* ---------- lineage ---------- */
   .mapscroll{overflow-x:auto;overflow-y:hidden;padding-bottom:10px;direction:ltr;-webkit-overflow-scrolling:touch}
@@ -715,6 +728,8 @@
         <p class="bio" id="pBio"></p>
 
         <a class="hear" id="pHear" href="#" target="_blank" rel="noopener noreferrer"></a>
+        <button class="save-record" id="saveRecord" type="button" aria-pressed="false">＋ SAVE TO YOUR CRATE</button>
+        <p class="saved-note" id="savedNote" aria-live="polite"></p>
 
       </div>
     </div>
@@ -966,6 +981,22 @@
   /* ---------- state ---------- */
     var current = ARTISTS[0].id;
   var selectedGenre = 'blues';
+  var savedRecords = [];
+  try {
+    var storedRecords = window.localStorage.getItem('runout-saved-records');
+    if (storedRecords) {
+      var parsedRecords = JSON.parse(storedRecords);
+      if (Array.isArray(parsedRecords)) {
+        savedRecords = parsedRecords.filter(function(id){
+          return ARTISTS.some(function(a){ return a.id === id; });
+        });
+      }
+    }
+  } catch(e) {}
+  function persistSavedRecords(){
+    try { window.localStorage.setItem('runout-saved-records', JSON.stringify(savedRecords)); }
+    catch(e) { $('savedNote').textContent = 'Saving is unavailable in this browser session.'; }
+  }
 
 
   var $ = function(id){ return document.getElementById(id); };
@@ -1155,7 +1186,20 @@
 
     document.querySelectorAll('.cut').forEach(function(b){
       b.setAttribute('aria-current', String(b.dataset.id === current));
+      var mark = b.querySelector('.saved-mark');
+      if (mark) mark.remove();
+      if (savedRecords.indexOf(b.dataset.id) !== -1){
+        var title = b.querySelector('.t b');
+        if (title) title.insertAdjacentHTML('beforeend','<span class="saved-mark" aria-label="Saved"> ★</span>');
+      }
     });
+    var save = $('saveRecord');
+    var isSaved = savedRecords.indexOf(current) !== -1;
+    save.setAttribute('aria-pressed', String(isSaved));
+    save.textContent = isSaved ? '✓ SAVED TO YOUR CRATE' : '＋ SAVE TO YOUR CRATE';
+    $('savedNote').textContent = savedRecords.length
+      ? savedRecords.length + (savedRecords.length === 1 ? ' record saved on this device.' : ' records saved on this device.')
+      : 'Your saved records stay on this device.';
   }
 
   /* ---------- render everything ---------- */
@@ -1222,6 +1266,14 @@
   $('crate').addEventListener('click', function(e){
     var b = e.target.closest('.cut');
     if (b) loadTrack(b.dataset.id);
+  });
+  $('saveRecord').addEventListener('click', function(){
+    var index = savedRecords.indexOf(current);
+    if (index === -1) savedRecords.push(current);
+    else savedRecords.splice(index, 1);
+    persistSavedRecords();
+    renderPanel(C);
+    replay(document.querySelector('.panel'), 'swap');
   });
 
   /* ---------- lineage interaction ---------- */
