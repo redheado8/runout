@@ -156,13 +156,16 @@
   .hero .lede{font-size:clamp(14px,1.6vw,18px);color:#C2B0A6;line-height:1.7;max-width:34ch;margin-inline:auto}
 
   .cue{
-    position:absolute;
-    left:50%;bottom:clamp(20px,3vw,34px);
-    transform:translateX(-50%);
+    position:relative;
+    left:auto;
+    bottom:auto;
+    transform:none;
     z-index:6;
     display:grid;
     justify-items:center;
     gap:9px;
+    width:max-content;
+    margin:clamp(20px,3vw,32px) auto 0;
     padding:6px 12px;
     color:var(--dust);
     font-family:"Big Shoulders Display",Impact,sans-serif;
@@ -172,8 +175,7 @@
   }
   .cue:hover{color:var(--bone);text-decoration:none}
   .cue i{display:block;width:1px;height:26px;background:linear-gradient(var(--hair),transparent)}
-  /* Optical centering: compensate only for the trailing letter-spacing. */
-  .cue span{display:block;position:relative;left:-.15em;text-align:center}
+  .cue span{display:block;text-align:center;letter-spacing:.3em;padding-left:.3em}
 
   /* ---------- motion ---------- */
   @media (prefers-reduced-motion:no-preference){
@@ -668,10 +670,12 @@
     </div>
   </div>
 
-  <a class="cue" href="#eras" aria-label="Skip to the eras">
-    <span id="cueLabel"></span>
-    <i aria-hidden="true"></i>
-  </a>
+  <div class="wrap">
+    <a class="cue" href="#eras" aria-label="Skip to the eras">
+      <span id="cueLabel"></span>
+      <i aria-hidden="true"></i>
+    </a>
+  </div>
 </div>
 
 <section class="figures">
