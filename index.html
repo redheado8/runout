@@ -417,6 +417,17 @@
   }
   .era p{max-width:66ch}
   .era p + p{margin-top:14px}
+  .era{position:relative;scroll-margin-top:100px}
+  .era-index{display:flex;align-items:center;gap:10px;margin:0 0 22px;color:var(--dust);font:700 10px var(--display);letter-spacing:.2em}
+  .era-index::before{content:"";width:26px;height:1px;background:var(--scarlet)}
+  .era-index b{color:var(--scarlet);font-size:12px}
+  .era-nav{display:flex;gap:8px;overflow-x:auto;padding:0 0 16px;margin:0 0 10px;border-bottom:1px solid var(--hair);scrollbar-width:thin;scrollbar-color:var(--oxblood) transparent;direction:ltr}
+  .era-jump{flex:0 0 auto;min-height:42px;padding:8px 12px;border:1px solid var(--hair);background:transparent;color:var(--dust);font:700 11px var(--display);letter-spacing:.08em;cursor:pointer;transition:all .2s}
+  .era-jump:hover,.era-jump:focus-visible{border-color:var(--scarlet);color:var(--bone)}
+  .era-jump[aria-current="true"]{background:var(--oxblood);border-color:var(--scarlet);color:var(--bone)}
+  .era-jump small{display:block;color:inherit;opacity:.72;font:10px var(--text);letter-spacing:0;margin-top:2px}
+  .era-progress{height:2px;background:var(--hair);margin:0 0 28px;overflow:hidden}
+  .era-progress span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--scarlet),#EDE0D4);transition:width .35s}
   .who{margin-top:20px;font-size:15px;color:var(--dust);max-width:66ch}
   .who b{
     font-family:var(--display);font-weight:700;font-size:15px;letter-spacing:var(--track);
@@ -538,6 +549,11 @@
     transition:border-color .16s,color .16s,background .16s;
   }
   .hear:hover{border-color:var(--scarlet);color:var(--scarlet);text-decoration:none}
+  .crate-tools{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:0 0 12px;margin-bottom:4px;border-bottom:1px solid var(--hair)}
+  .crate-count{color:var(--dust);font:700 11px var(--display);letter-spacing:.14em}
+  .crate-filter{border:1px solid var(--hair);background:transparent;color:var(--dust);padding:8px 10px;min-height:38px;font:700 10px var(--display);letter-spacing:.1em;cursor:pointer}
+  .crate-filter[aria-pressed="true"],.crate-filter:hover{border-color:var(--scarlet);color:var(--bone);background:rgba(200,16,46,.1)}
+  .crate-empty{padding:24px 12px;color:var(--dust);font-size:14px;line-height:1.6;border-bottom:1px solid var(--hair)}
   .save-record{
     display:inline-flex;align-items:center;justify-content:center;gap:8px;
     margin:24px 0 0 10px;padding:11px 14px;min-height:46px;
@@ -570,6 +586,15 @@
   .link.on{stroke:var(--scarlet);stroke-width:2.4;opacity:1}
   .link.dim{opacity:.28}
 
+  .map-tools{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin:0 0 16px}
+  .map-filters{display:flex;gap:7px;flex-wrap:wrap}
+  .map-filter{border:1px solid var(--hair);background:transparent;color:var(--dust);padding:8px 11px;min-height:38px;font:700 10px var(--display);letter-spacing:.12em;cursor:pointer}
+  .map-filter:hover,.map-filter:focus-visible{border-color:var(--scarlet);color:var(--bone)}
+  .map-filter[aria-pressed="true"]{background:var(--oxblood);border-color:var(--scarlet);color:var(--bone)}
+  .map-hint{font-size:12px;color:var(--dust)}
+  .node.filtered{opacity:.14}
+  .node.filtered:hover,.node.filtered:focus-visible{opacity:1}
+  .link.filtered{opacity:.07}
   .readout{margin-top:28px;border-inline-start:2px solid var(--scarlet);padding:4px 0;padding-inline-start:22px;min-height:120px}
   .readout h4{font-family:var(--display);font-weight:700;font-size:26px;letter-spacing:var(--track);margin-bottom:2px}
   .readout .span{color:var(--scarlet);font-size:14px;letter-spacing:var(--track);margin-bottom:10px;direction:ltr;text-align:start}
@@ -783,6 +808,8 @@
       <h2 id="erasTitle" data-text=""></h2>
       <p id="erasSub"></p>
     </div>
+    <div class="era-nav" id="eraNav" aria-label="Jump to a rock era"></div>
+    <div class="era-progress" aria-hidden="true"><span id="eraProgress"></span></div>
     <div id="eraList"></div>
   </div>
 </section>
@@ -795,7 +822,14 @@
     </div>
 
     <div class="room">
-      <div class="crate" id="crate"></div>
+      <div>
+        <div class="crate-tools">
+          <span class="crate-count" id="crateCount">06 RECORDS</span>
+          <button class="crate-filter" id="savedOnly" type="button" aria-pressed="false">SHOW SAVED ★</button>
+        </div>
+        <div class="crate" id="crate"></div>
+        <p class="crate-empty" id="crateEmpty" hidden>No saved records yet. Choose a record and save it to build your personal crate.</p>
+      </div>
 
       <div class="panel">
         <div class="portrait" id="portrait"><b id="pName"></b></div>
@@ -819,6 +853,15 @@
     <div class="head">
       <h2 id="linTitle" data-text=""></h2>
       <p id="linSub"></p>
+    </div>
+    <div class="map-tools">
+      <div class="map-filters" role="group" aria-label="Highlight a family of genres">
+        <button class="map-filter" type="button" data-map-filter="all" aria-pressed="true">ALL BRANCHES</button>
+        <button class="map-filter" type="button" data-map-filter="roots" aria-pressed="false">THE ROOTS</button>
+        <button class="map-filter" type="button" data-map-filter="heavy" aria-pressed="false">HEAVY / METAL</button>
+        <button class="map-filter" type="button" data-map-filter="underground" aria-pressed="false">PUNK / UNDERGROUND</button>
+      </div>
+      <span class="map-hint">SELECT A GENRE TO TRACE ITS LINEAGE ↗</span>
     </div>
     <div class="mapscroll">
       <svg viewBox="0 0 1200 600" role="img" aria-label="A branching map of rock genres">
@@ -1094,8 +1137,11 @@
 
   function renderEras(t){
     var out = '';
+    var nav = '';
     t.eras.forEach(function(e, idx){
-      out += '<article class="era"><div class="years">' + esc(e.years) +
+      nav += '<button class="era-jump" type="button" data-era-jump="' + idx + '" aria-current="' + (idx === 0) + '">' +
+        '<span>' + String(idx + 1).padStart(2,'0') + ' / ' + esc(e.years.split(/[—–]/)[0].trim()) + '</span><small>' + esc(e.tag.split('·').pop().trim()) + '</small></button>';
+      out += '<article class="era" id="era-' + idx + '" data-era-index="' + idx + '"><div class="years">' + esc(e.years) +
              '<small>' + esc(e.tag) + '</small></div><div>' +
              '<h3>' + esc(e.title) + '</h3>';
       e.paras.forEach(function(p){ out += '<p>' + esc(p) + '</p>'; });
@@ -1119,13 +1165,32 @@
                '</p></div></div>';
       }
     });
+    $('eraNav').innerHTML = nav;
     $('eraList').innerHTML = out;
+    updateEraProgress();
+  }
+
+  function updateEraProgress(){
+    var eras = Array.from(document.querySelectorAll('.era[data-era-index]'));
+    if (!eras.length) return;
+    var currentEra = 0, best = Infinity;
+    eras.forEach(function(el){
+      var distance = Math.abs(el.getBoundingClientRect().top - 120);
+      if (distance < best){ best = distance; currentEra = Number(el.dataset.eraIndex); }
+    });
+    $('eraProgress').style.width = ((currentEra + 1) / eras.length * 100) + '%';
+    document.querySelectorAll('.era-jump').forEach(function(b){
+      b.setAttribute('aria-current', String(Number(b.dataset.eraJump) === currentEra));
+    });
   }
 
   /* ---------- render: crate ---------- */
+  var showSavedOnly = false;
   function renderCrate(){
-    var out = '';
+    var out = '', visible = 0;
     ARTISTS.forEach(function(a, i){
+      if (showSavedOnly && savedRecords.indexOf(a.id) === -1) return;
+      visible++;
       out += '<button class="cut" data-id="' + a.id + '" aria-current="' +
              (a.id === current) + '">' +
              '<span class="no">' + (i+1 < 10 ? '0' : '') + (i+1) + '</span>' +
@@ -1133,6 +1198,10 @@
              '<span class="yr">' + esc(a.year) + '</span></button>';
     });
     $('crate').innerHTML = out;
+    $('crateCount').textContent = (showSavedOnly ? savedRecords.length : ARTISTS.length).toString().padStart(2,'0') + (showSavedOnly ? ' SAVED' : ' RECORDS');
+    $('savedOnly').setAttribute('aria-pressed', String(showSavedOnly));
+    $('savedOnly').textContent = showSavedOnly ? 'SHOW ALL RECORDS' : 'SHOW SAVED ★';
+    $('crateEmpty').hidden = !(showSavedOnly && visible === 0);
   }
 
   /* ---------- render: lineage ---------- */
@@ -1175,25 +1244,48 @@
     });
   }
 
+  var mapFilter = 'all';
+  var MAP_FAMILIES = {
+    roots:['blues','rnr','brit','garage','surf'],
+    heavy:['hard','metal','thrash','glam','prog'],
+    underground:['garage','proto','punk','post','grunge','indie','goth']
+  };
   function paintMap(t){
-    var related = Object.create(null);
+    var related = Object.create(null), ancestors = Object.create(null);
     related[selectedGenre] = true;
     LINKS.forEach(function(pair){
       if (pair[0] === selectedGenre) related[pair[1]] = true;
       if (pair[1] === selectedGenre) related[pair[0]] = true;
     });
+    /* Walk upstream so the readout selection can reveal its historical roots. */
+    var stack = [selectedGenre];
+    while(stack.length){
+      var child = stack.pop();
+      LINKS.forEach(function(pair){
+        if(pair[1] === child && !ancestors[pair[0]]){
+          ancestors[pair[0]] = true; related[pair[0]] = true; stack.push(pair[0]);
+        }
+      });
+    }
+    var family = MAP_FAMILIES[mapFilter] || [];
     document.querySelectorAll('.node').forEach(function(g){
       var id = g.dataset.id, d = t.genres[id];
+      var familyMatch = mapFilter === 'all' || family.indexOf(id) !== -1;
       g.querySelector('text').textContent = d.name;
-      g.setAttribute('aria-label', d.name + ', ' + d.span + '. Select to explore its direct genre connections.');
+      g.setAttribute('aria-label', d.name + ', ' + d.span + '. Select to trace its historical lineage.');
       g.setAttribute('aria-pressed', String(id === selectedGenre));
       g.classList.toggle('on', id === selectedGenre);
       g.classList.toggle('related', id !== selectedGenre && !!related[id]);
+      g.classList.toggle('filtered', !familyMatch);
     });
     document.querySelectorAll('.link').forEach(function(p){
-      var on = (p.dataset.to === selectedGenre || p.dataset.from === selectedGenre);
+      var on = (p.dataset.to === selectedGenre || p.dataset.from === selectedGenre ||
+        (!!ancestors[p.dataset.to] && !!ancestors[p.dataset.from]) ||
+        (!!ancestors[p.dataset.from] && p.dataset.to === selectedGenre));
+      var familyMatch = mapFilter === 'all' || (family.indexOf(p.dataset.from) !== -1 && family.indexOf(p.dataset.to) !== -1);
       p.classList.toggle('on', on);
       p.classList.toggle('dim', !on);
+      p.classList.toggle('filtered', !familyMatch);
       if (still) return;
       try {
         if (on){
@@ -1344,6 +1436,27 @@
   $('crate').addEventListener('click', function(e){
     var b = e.target.closest('.cut');
     if (b) loadTrack(b.dataset.id);
+  });
+  $('savedOnly').addEventListener('click', function(){
+    showSavedOnly = !showSavedOnly;
+    renderCrate();
+    renderPanel(C);
+  });
+  $('eraNav').addEventListener('click', function(e){
+    var b = e.target.closest('[data-era-jump]');
+    if (!b) return;
+    var target = $('era-' + b.dataset.eraJump);
+    if (target) target.scrollIntoView({behavior:still ? 'auto' : 'smooth',block:'start'});
+  });
+  window.addEventListener('scroll', updateEraProgress, {passive:true});
+  document.querySelectorAll('[data-map-filter]').forEach(function(b){
+    b.addEventListener('click', function(){
+      mapFilter = b.dataset.mapFilter;
+      document.querySelectorAll('[data-map-filter]').forEach(function(x){
+        x.setAttribute('aria-pressed',String(x === b));
+      });
+      paintMap(C);
+    });
   });
   $('saveRecord').addEventListener('click', function(){
     var index = savedRecords.indexOf(current);
