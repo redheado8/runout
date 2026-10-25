@@ -461,6 +461,58 @@
     .sleeve{grid-template-columns:1fr;max-width:100%}
     .sleeve .art{aspect-ratio:16/7}
   }
+
+  /* ---------- editorial polish: responsive rhythm, clear interaction ---------- */
+  :root{
+    --hair-strong:rgba(237,224,212,.22);
+    --ease-out:cubic-bezier(.2,.75,.25,1);
+  }
+  ::selection{background:var(--scarlet);color:var(--bone)}
+  section{scroll-margin-top:78px}
+  .head{margin-bottom:clamp(26px,4vw,48px)}
+  .head h2{max-width:18ch;text-wrap:balance}
+  .head p{max-width:62ch;color:#B7A39A}
+  .figures .wrap{border-top:1px solid var(--hair);border-bottom:1px solid var(--hair)}
+  .figures .wrap > *{min-width:0}
+  .era{
+    border-top:1px solid var(--hair);
+    padding-block:clamp(22px,3.2vw,38px);
+    transition:background .25s var(--ease-out),padding-inline .25s var(--ease-out),border-color .25s;
+  }
+  .era:hover{background:linear-gradient(90deg,rgba(200,16,46,.055),transparent 72%);border-color:var(--hair-strong)}
+  .cut,.hear,.cue,.bar nav a{
+    -webkit-tap-highlight-color:transparent;
+    transition:color .2s,background-color .2s,border-color .2s,transform .2s var(--ease-out);
+  }
+  .cut{min-height:44px}
+  .cut:hover{border-color:rgba(200,16,46,.65);transform:translateY(-2px)}
+  .hear{min-height:46px;display:inline-flex;align-items:center;justify-content:center}
+  .hear:hover{transform:translateY(-2px);text-decoration:none}
+  .room,.readout,.mapscroll{border-color:var(--hair-strong)}
+  .readout{background:linear-gradient(135deg,rgba(237,224,212,.035),transparent 62%),var(--sleeve)}
+  .mapscroll{overscroll-behavior-x:contain}
+  #nodes [tabindex],#nodes g{cursor:pointer}
+  .bar nav a:focus-visible,.cut:focus-visible,.hear:focus-visible,.cue:focus-visible{outline-offset:5px}
+  @media (hover:none){
+    .era:hover,.cut:hover,.hear:hover{transform:none;background-color:transparent}
+  }
+  @media (max-width:620px){
+    body{font-size:16px;line-height:1.68}
+    .wrap{width:min(100% - 32px,1120px)}
+    .hero{padding-top:58px;padding-bottom:90px}
+    .plate h1{font-size:clamp(72px,21vw,132px);letter-spacing:.015em}
+    .hero .lede{max-width:31ch}
+    .head h2{font-size:clamp(30px,9vw,44px)}
+    .figures .wrap{padding-block:24px}
+    .figures{padding-block:10px}
+    .era{padding-block:24px}
+    .mapscroll svg{min-width:760px}
+    footer .wrap{flex-direction:column;gap:8px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}
+  }
+
 </style>
 </head>
 <body>
